@@ -26,7 +26,7 @@ position=$(slurp -b 00000000 -p)
 
 # Sleep at least for a second to prevet issues with grim always
 # returning improper color.
-sleep 1
+sleep 0.1
 
 # Store the hex color value using graphicsmagick or imagemagick.
 if command -v /usr/bin/gm &> /dev/null; then
@@ -46,7 +46,7 @@ else
 fi
 
 if [ "$1" == "clipboard" ]; then
-	echo $color | wl-copy -n
+	echo $color | wl-copy -n --primary
 else
 	# Display a color picker and store the returned rgb color
 	rgb_color=$(zenity --color-selection \
@@ -63,6 +63,6 @@ else
 	    done
 
     	# Copy user selection to clipboard
-    	echo $hex_color | wl-copy -n
+	echo $hex_color | wl-copy -n --primary
 	fi
 fi
